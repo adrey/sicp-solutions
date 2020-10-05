@@ -1,0 +1,13 @@
+#lang sicp
+
+(define (expmod base exp m)
+  (cond ((= exp 0) 1)
+        ((even? exp)
+         (remainder (* (expmod base (/ exp 2) m)
+                       (expmod base (/ exp 2) m))
+                    m))
+        (else
+         (remainder (* base (expmod base (- exp 1) m))
+                    m))))
+;now on each step expmod have to be calculated twice, number of steps is log(n)
+; so total number of calculations is 2^(log(n)) = n
